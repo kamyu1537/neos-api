@@ -2,7 +2,7 @@ const Fastify = require('fastify');
 const axios = require('axios');
 const createError = require('http-errors');
 
-const cloudXBaseUrl = 'https://cloudx.azurewebsites.net/api/users/';
+const USERS_API_URL = 'https://cloudx.azurewebsites.net/api/users/';
 
 const fastify = Fastify();
 
@@ -10,7 +10,7 @@ const fastify = Fastify();
 fastify.get('/neosrec/:userId/:id', async (req) => {
   const { userId, id } = req.params;
   const { data, status } = await axios.get(
-    `${cloudXBaseUrl}/${userId}/records/${id}`
+    `${USERS_API_URL}/${userId}/records/${id}`
   );
   if (status !== 200) throw createError(500, 'server error');
   return `${data.path}\\${encodeURIComponent(data.name)}`;
@@ -23,7 +23,7 @@ fastify.get('/objects/:userId/*', async (req) => {
 
   const param = path.split('/').map(encodeURIComponent).join('\\');
   const { data, status } = await axios.get(
-    `${cloudXBaseUrl}/${userId}/records?path=${param}`
+    `${USERS_API_URL}/${userId}/records?path=${param}`
   );
   if (status !== 200) throw createError(500, 'server error');
 

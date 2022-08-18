@@ -6,7 +6,7 @@ const cloudXBaseUrl = 'https://cloudx.azurewebsites.net/api/users/';
 
 const fastify = Fastify();
 
-// 디렉토리 경로 가져오기
+// Get public folder path
 fastify.get('/neosrec/:userId/:id', async (req) => {
   const { userId, id } = req.params;
   const { data, status } = await axios.get(
@@ -16,7 +16,7 @@ fastify.get('/neosrec/:userId/:id', async (req) => {
   return `${data.path}\\${encodeURIComponent(data.name)}`;
 });
 
-// 에셋 목록 가져오기
+// Get object in the public folder
 fastify.get('/objects/:userId/*', async (req) => {
   const userId = req.params.userId;
   const path = req.params['*'];

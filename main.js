@@ -17,7 +17,7 @@ fastify.get('/neosrec/:userId/:id', async (req) => {
 });
 
 // 에셋 목록 가져오기
-fastify.get('/assets/:userId/*', async (req) => {
+fastify.get('/objects/:userId/*', async (req) => {
   const userId = req.params.userId;
   const path = req.params['*'];
 
